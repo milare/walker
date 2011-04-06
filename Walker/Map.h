@@ -10,11 +10,14 @@
 #import "Tile.h"
 
 @interface Map : NSObject {
-    NSMutableArray* tiles;	
+    NSMutableArray* tiles;
+    int realWidth;
+    int realHeight;
 }
 
 @property (retain) NSMutableArray* tiles;
-
+@property (nonatomic) int realWidth;
+@property (nonatomic) int realHeight;
 
 -(id) initWithWidth:(int)winSize andHeight:(int)height;
 -(void) dump;

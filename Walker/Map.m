@@ -11,6 +11,8 @@
 @implementation Map
 
 @synthesize tiles;
+@synthesize realWidth;
+@synthesize realHeight;
 
 -(id) initWithWidth:(int)width andHeight:(int)height;
 {
@@ -23,14 +25,17 @@
 		int i, j;
         int tileWidth = width/ 32;
         int tileHeight = height / 32;
-        
+        self.realHeight = height;
+        self.realWidth = width;
         
 		
 		for (i = 0; i < tileHeight; i++)
 		{
 			for (j = 0; j < tileWidth; j++)
 			{
-                if((i%3 == 0) && (j %4 ==0)){
+                if((i==0)||(j==0)||(i==tileHeight-1)||(j==tileWidth-1)){
+                    currentNode = [[Tile alloc] initWithKind:@"brick" at:ccp(j*32+16, i*32+16)];
+                }else if((i%3 == 0) && (j %4 ==0)){
                     currentNode = [[Tile alloc] initWithKind:@"stone" at:ccp(j*32+16, i*32+16)];
                 }else{
                     currentNode = [[Tile alloc] initWithKind:@"grass" at:ccp(j*32+16, i*32+16)];

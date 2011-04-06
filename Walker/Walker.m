@@ -19,6 +19,8 @@
 @synthesize tileTypes;
 @synthesize drawer;
 @synthesize drawerOpened;
+@synthesize lastTile;
+@synthesize nextTile;
 
 +(CCScene *) scene
 {
@@ -55,8 +57,8 @@
             
             
         }
-        self.player = [CCSprite spriteWithFile:@"Player.png" rect:CGRectMake(0, 0, 32, 64)];
-        self.player.position = ccp(16,32);
+        self.player = [CCSprite spriteWithFile:@"PlayerDown.png" rect:CGRectMake(0, 0, 32, 48)];
+        self.player.position = ccp(48,56);
         [self addChild:player];
         
         drawerOpened = FALSE;
@@ -85,11 +87,47 @@
         [drawer addChild:drawerBg z:1 tag:1];
         
         [self addChild:drawer];
+        
+        
+        
         self.isTouchEnabled = YES;
         [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:NO];
 
 	}
 	return self;
+}
+
+-(void) changePlayerDirection:(id) sender data:(NSArray*) data
+{
+    Tile* last = [data objectAtIndex:0];
+    Tile* next = [data objectAtIndex:1];
+    
+    int lastX = last.sprite.position.x;
+    int lastY = last.sprite.position.y;
+    int nextX = next.sprite.position.x;
+    int nextY = next.sprite.position.y;
+    
+    if((lastX < nextX)&&(lastY == nextY))
+    {
+        //right
+        [player setTexture:[[CCTextureCache sharedTextureCache] addImage:@"PlayerRight.png"]];
+        
+    }else if((lastX > nextX)&&(lastY == nextY))
+    {
+        // left
+        [player setTexture:[[CCTextureCache sharedTextureCache] addImage:@"PlayerLeft.png"]];
+        
+    }else if((lastX == nextX)&&(lastY < nextY))
+    {
+        // up
+        [player setTexture:[[CCTextureCache sharedTextureCache] addImage:@"PlayerUp.png"]];
+        
+    }else if((lastX == nextX)&&(lastY > nextY))
+    {
+        // down
+        [player setTexture:[[CCTextureCache sharedTextureCache] addImage:@"PlayerDown.png"]];
+    }
+    
 }
 
 
@@ -102,7 +140,7 @@
     int targetTileX = (location.x /32);
     int targetTileY = (location.y /32);
     int sourceTileX = (self.player.position.x - 16)/32;
-    int sourceTileY = (self.player.position.y - 32 )/32;
+    int sourceTileY = (self.player.position.y - 24 )/32;
     CCSprite* drawerBg = (CCSprite*)[drawer getChildByTag:1];
     CGRect drawerRect;
     
@@ -137,6 +175,7 @@
         [self removeChild:selSprite cleanup:TRUE];
         [selSprite release];
         selSprite = nil;
+        
     }
     else{
         if (drawerOpened) {
@@ -167,24 +206,29 @@
                 NSMutableArray* path = [map dijkstraFromNode:source toNode:target];
 
                 int count, i;
-
+                lastTile = source;
                 [path addObject:target];
 
                 count = [path count];
                 NSMutableArray* actions = [[NSMutableArray alloc] init];
                 
-               for (i = 0; i < count; i++)
-               {
-                   NSLog(@"%@", [[path objectAtIndex:i] value]);
-                   Tile* nextTile = [path objectAtIndex:i];
-                   CGPoint nextPosition = ccp(nextTile.sprite.position.x,nextTile.sprite.position.y+16);
-                   [actions addObject:[CCMoveTo actionWithDuration: 0.5 position: nextPosition]];
-               }
-
+                for (i = 0; i < count; i++)
+                {
+                    NSLog(@"%@", [[path objectAtIndex:i] value]);
+                    self.nextTile = [path objectAtIndex:i];
+                    CGPoint nextPosition = ccp(self.nextTile.sprite.position.x,self.nextTile.sprite.position.y+16);
+                    NSArray* ary = [[NSArray alloc] initWithObjects:self.lastTile, self.nextTile, nil];
+                    [actions addObject:[CCCallFuncND actionWithTarget:self selector:@selector(changePlayerDirection:data:) data:ary]];
+                    [actions addObject:[CCMoveTo actionWithDuration: 0.3 position: nextPosition]];
+                    self.lastTile = self.nextTile;
+                }
 
                 CCSequence* sequence = [CCSequence actionsWithArray:actions];
                 [player runAction:sequence];
-
+                
+                lastTile = nil;
+                nextTile = nil;
+                
                 [actions release];
             }
         }
@@ -243,6 +287,7 @@
 	// cocos2d will automatically release all the children (Label)
 	[map dealloc];
     [player dealloc];
+
 	// don't forget to call "super dealloc"
 	[super dealloc];
 }

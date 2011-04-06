@@ -131,6 +131,10 @@
 		38C967DF1346739D00F1A5F4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C967DE1346739D00F1A5F4 /* RootViewController.m */; };
 		38EA982D134A72F500D1633A /* Drawer.png in Resources */ = {isa = PBXBuildFile; fileRef = 38EA982C134A72F500D1633A /* Drawer.png */; };
 		38EE5AE21346AF000067A492 /* Stone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38EE5AE11346AF000067A492 /* Stone.png */; };
+		38F05A3A134BCD6F0034EB98 /* PlayerDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 38F05A36134BCD6F0034EB98 /* PlayerDown.png */; };
+		38F05A3B134BCD6F0034EB98 /* PlayerLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 38F05A37134BCD6F0034EB98 /* PlayerLeft.png */; };
+		38F05A3C134BCD6F0034EB98 /* PlayerRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 38F05A38134BCD6F0034EB98 /* PlayerRight.png */; };
+		38F05A3D134BCD6F0034EB98 /* PlayerUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 38F05A39134BCD6F0034EB98 /* PlayerUp.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -382,6 +386,10 @@
 		38C967E31346739D00F1A5F4 /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		38EA982C134A72F500D1633A /* Drawer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Drawer.png; sourceTree = "<group>"; };
 		38EE5AE11346AF000067A492 /* Stone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stone.png; sourceTree = "<group>"; };
+		38F05A36134BCD6F0034EB98 /* PlayerDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayerDown.png; sourceTree = "<group>"; };
+		38F05A37134BCD6F0034EB98 /* PlayerLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayerLeft.png; sourceTree = "<group>"; };
+		38F05A38134BCD6F0034EB98 /* PlayerRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayerRight.png; sourceTree = "<group>"; };
+		38F05A39134BCD6F0034EB98 /* PlayerUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayerUp.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -471,6 +479,10 @@
 		38C966901346739900F1A5F4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				38F05A36134BCD6F0034EB98 /* PlayerDown.png */,
+				38F05A37134BCD6F0034EB98 /* PlayerLeft.png */,
+				38F05A38134BCD6F0034EB98 /* PlayerRight.png */,
+				38F05A39134BCD6F0034EB98 /* PlayerUp.png */,
 				383652FB134AAE81007ABE1C /* Brick.png */,
 				38EA982C134A72F500D1633A /* Drawer.png */,
 				38EE5AE11346AF000067A492 /* Stone.png */,
@@ -801,6 +813,10 @@
 				38EE5AE21346AF000067A492 /* Stone.png in Resources */,
 				38EA982D134A72F500D1633A /* Drawer.png in Resources */,
 				383652FC134AAE81007ABE1C /* Brick.png in Resources */,
+				38F05A3A134BCD6F0034EB98 /* PlayerDown.png in Resources */,
+				38F05A3B134BCD6F0034EB98 /* PlayerLeft.png in Resources */,
+				38F05A3C134BCD6F0034EB98 /* PlayerRight.png in Resources */,
+				38F05A3D134BCD6F0034EB98 /* PlayerUp.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
